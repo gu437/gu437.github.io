@@ -1,11 +1,93 @@
 {
   "date": "2026-08-11",
-  "updateTime": "2026-08-11T14:54:42+08:00",
+  "updateTime": "2026-08-11T14:57:57+08:00",
   "categories": {
-    "today": [],
-    "network": [],
-    "linux": [],
+    "today": [
+      {
+        "title": "本周主线：函数分水岭",
+        "summary": "Python 分类今天有 4 条函数内容 + 1 道闭卷自测。完成标准：不看笔记写出 def + 参数 + return，并用 python3 跑通。",
+        "reason": "函数是知识地图的分水岭，写完它才能进入'看懂 pickle 反序列化调用链'里程碑。今天所有内容都为它服务。",
+        "tags": [
+          "本周任务",
+          "函数"
+        ]
+      },
+      {
+        "title": "今日漏洞：Langflow 代码注入被在野利用",
+        "summary": "一个 AI 工具因为把用户提交的 Python 直接 exec 执行被打穿（CVE-2026-9198）。→ 看 vuln 分类详情 + websec 分类配套原理。",
+        "reason": "让你今天就看到：函数/exec 不是课本知识，是真实漏洞的命门。学 Python 的意义在此。",
+        "tags": [
+          "CVE",
+          "今日"
+        ]
+      }
+    ],
+    "network": [
+      {
+        "title": "TCP 三次握手四次挥手：大白话版",
+        "summary": "三次握手 = 双方互相确认'我能听到你，你也能听到我'；四次挥手 = 挂电话要两边都说完再见（全双工，两个方向独立关闭）。",
+        "reason": "网络已学过，这是间隔复习：先闭卷自己画一遍流程图再对照文章。以后抓包看 SYN/ACK 就靠这个。",
+        "url": "https://www.cnblogs.com/three-fighter/p/14802786.html",
+        "tags": [
+          "网络",
+          "TCP",
+          "复习"
+        ]
+      }
+    ],
+    "linux": [
+      {
+        "title": "Linux 文件权限：r/w/x 和 chmod 大白话",
+        "summary": "每个文件有 3 组权限（属主/同组/其他人），每组 r=读、w=写、x=执行。chmod 755 文件 这种数字就是给三组人分别打分。",
+        "reason": "Linux 是知识地图的下一格（还没测过）——权限是所有 Linux 提权漏洞的地基。先搞懂 rwx，才能看懂 chmod 777 为什么危险。官方中文文档，权威且零门槛。",
+        "url": "https://docs.redhat.com/zh-cn/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/managing-file-system-permissions_configuring-basic-system-settings",
+        "tags": [
+          "Linux",
+          "权限"
+        ]
+      },
+      {
+        "title": "Linux 零基础视频入门（2026 新版）",
+        "summary": "98 集从装系统到常用命令全覆盖的入门视频，适合纯小白跟着动手敲。",
+        "reason": "Linux 还没系统学过，用视频过一遍建立体感比啃文档快。看完至少要知道 ls/cd/chmod 是干嘛的。",
+        "url": "https://www.bilibili.com/video/BV1JogC6JEzh/",
+        "tags": [
+          "Linux",
+          "视频"
+        ]
+      }
+    ],
     "python": [
+      {
+        "title": "函数的参数：5 种参数怎么选（廖雪峰）",
+        "summary": "必选参数、默认参数、可变参数、关键字参数、命名关键字参数。大白话：给函数留'插槽'，有的必须填、有的有默认值、有的可以塞任意多个。",
+        "reason": "函数章节分水岭的核心知识点——写渗透脚本时最常用默认参数和可变参数（比如收集任意多个目标 IP）。先看懂顺序规则，别背，自己改参数试。",
+        "url": "https://liaoxuefeng.com/books/python/function/parameter/index.html",
+        "tags": [
+          "函数",
+          "参数"
+        ]
+      },
+      {
+        "title": "函数入门：def、参数、返回值一次看懂",
+        "summary": "函数 = 可重复使用的代码块：def 函数名(参数): 函数体 return 结果。注意缩进和语法规范。",
+        "reason": "系统学习前的总览，和对话沉淀那条互为补充：先有整体概念，再深入参数细节。",
+        "url": "https://cloud.tencent.com/developer/article/2332644",
+        "tags": [
+          "函数",
+          "入门"
+        ]
+      },
+      {
+        "title": "今日自测（闭卷）：把'检查密码长度'写成函数",
+        "summary": "不看书，写一个 check_password(pwd) 函数：长度 ≥ 8 返回 True，否则 False；再写 3 行调用代码验证。写完用 python3 跑通才算过。",
+        "reason": "检索练习是最有效的学习法——写完跑通 = 关联结构理解；只看不写 = 幻觉式掌握。边界题先自己测：空字符串、正好 8 位、超长呢？",
+        "tags": [
+          "自测",
+          "函数",
+          "检索练习"
+        ]
+      },
       {
         "title": "函数是什么：把步骤打包成'工具'",
         "summary": "函数给一堆代码起个名字，以后喊名字就能执行。def 加法(a, b): return a + b——调用'加法(1,2)'得 3。不用重复写同样的代码。",
@@ -16,11 +98,67 @@
         ]
       }
     ],
-    "websec": [],
-    "vuln": [],
+    "websec": [
+      {
+        "title": "代码注入：为什么'用户输入变成代码'最危险",
+        "summary": "程序如果直接把用户输入拿去执行（exec、eval、拼命令），等于把枪递给陌生人。Langflow 漏洞就是这么被打穿的。",
+        "reason": "高级配基础：今天推的 CVE 就是代码注入——你现在学的函数/exec 正是理解它的钥匙。漏洞根因 = 程序信任了不该信任的输入。",
+        "url": "https://owasp.org/www-community/attacks/Command_Injection",
+        "tags": [
+          "代码注入",
+          "原理"
+        ]
+      }
+    ],
+    "vuln": [
+      {
+        "title": "CVE-2026-9198：Langflow 未授权 RCE 被在野利用",
+        "summary": "IBM Langflow 1.0.0-1.10.0：无需登录，把两个接口串起来就能让服务器执行攻击者写的 Python 代码（exec）。已被 CISA 列入 KEV（已知被利用漏洞目录）。",
+        "reason": "最贴近你学习阶段的真实漏洞：攻击者提交的 Python 被 exec 执行——正是你学函数时最该警惕的东西。看懂它 = 向'看懂 pickle 反序列化调用链'里程碑迈一步。",
+        "url": "https://www.sentinelone.com/vulnerability-database/cve-2026-9198/",
+        "tags": [
+          "CVE",
+          "RCE",
+          "代码注入"
+        ]
+      }
+    ],
     "intranet": [],
-    "ctf": [],
-    "tools": [],
-    "thinking": []
+    "ctf": [
+      {
+        "title": "Hello CTF：从零拿下第一面 flag",
+        "summary": "开源免费的新手 CTF 教程，从环境搭建到第一场比赛，每步都有题可练。",
+        "reason": "CTF 是检验 Python 学习效果的最好游乐场——脚本能力上来后回来刷题，正反馈拉满。先收藏，函数学完再开始。",
+        "url": "https://hello-ctf.com/",
+        "tags": [
+          "CTF",
+          "入门"
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "title": "CTF 工具/靶场/实战路线汇总",
+        "summary": "一份把常用工具、练习靶场、进阶路线整理齐的清单，建议收藏当目录用。",
+        "reason": "先收藏，不必现在全装——你当前阶段只需要 python3 和一个文本编辑器。等函数学完再逐个上手。",
+        "url": "https://zhuanlan.zhihu.com/p/1962514016518804285",
+        "tags": [
+          "工具",
+          "CTF",
+          "路线"
+        ]
+      }
+    ],
+    "thinking": [
+      {
+        "title": "交不出货，不讨论评价",
+        "summary": "想聊'我什么水平'之前，先交一件货：一个跑通的函数、一段笔记、一份报告。货是评价的唯一依据。",
+        "reason": "反内耗机制（2026-08-10 约定）：自我怀疑时别空想，先写代码。今天的目标就一个——函数自测卡跑通。",
+        "tags": [
+          "心态",
+          "反内耗"
+        ]
+      }
+    ]
   }
 }

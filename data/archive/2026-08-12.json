@@ -1,11 +1,68 @@
 {
   "date": "2026-08-12",
-  "updateTime": "2026-08-12T09:29:16+08:00",
+  "updateTime": "2026-08-12T09:50:15+08:00",
   "categories": {
-    "today": [],
-    "network": [],
-    "linux": [],
+    "today": [
+      {
+        "title": "今日漏洞：TeamCity 反序列化 RCE 正在被利用",
+        "summary": "JetBrains TeamCity（公司用来自动构建代码的服务器）有个漏洞：攻击者不用登录，往请求里塞一段'打包好的对象数据'，服务器一还原（反序列化）就执行了攻击者的命令（CVE-2026-63077，CVSS 9.8）。CISA 已确认被在野利用，列入 KEV 目录。",
+        "reason": "反序列化正是你里程碑 1 的目标（看懂 pickle 反序列化调用链）——今天是这个原理的真实战例。先眼熟'反序列化'三个字，再看 websec 分类的配套原理。",
+        "url": "https://thehackernews.com/2026/08/cisa-flags-teamcity-cve-2026-63077-rce.html",
+        "tags": [
+          "今日",
+          "CVE",
+          "反序列化"
+        ]
+      },
+      {
+        "title": "今日主线：函数的下一个知识点——作用域",
+        "summary": "Python 分类今天推'局部变量 vs 全局变量'：函数里定义的变量出函数就失效，想改外面的变量要声明 global。看懂'函数里 print 得到全局变量、却改不动它'，作用域就通了。",
+        "reason": "函数章节的分水岭还没过完，作用域是紧跟 def 之后的第二块拼图，也是新手 90% 的第一个坑。今天推的内容都在为'看懂反序列化'铺路。",
+        "tags": [
+          "今日",
+          "函数",
+          "作用域"
+        ]
+      }
+    ],
+    "network": [
+      {
+        "title": "HTTP 请求/响应：浏览器和服务器怎么说话",
+        "summary": "打开网页 = 浏览器发一个'请求'（要什么页面），服务器回一个'响应'（给什么内容）。请求里有方法（GET 要数据 / POST 交数据）、URL、请求头；响应里有状态码（200 成功、404 找不到）和内容。",
+        "reason": "网络学过但那是 TCP 层，Web 安全全发生在 HTTP 层——SQL 注入、越权、文件上传，本质都是'改请求里的某个字段'。这是你从网络走向 Web 安全的必经桥。",
+        "url": "https://www.cnblogs.com/binyue/p/4500578.html",
+        "tags": [
+          "网络",
+          "HTTP",
+          "基础"
+        ]
+      }
+    ],
+    "linux": [
+      {
+        "title": "PATH 环境变量：为什么敲 python3 就能运行",
+        "summary": "PATH 是一串目录列表。你敲 python3，系统就按 PATH 里记的目录一个个找，找到第一个叫 python3 的可执行文件就运行。报错'command not found'，多半就是 PATH 里没有这个命令的目录。",
+        "reason": "接你'为什么存在'的追问：命令不是魔法，是系统按 PATH 去找文件。以后装工具（nmap、sqlmap）配 PATH 是家常便饭；它也是理解'PATH 劫持'这类提权漏洞的地基。",
+        "url": "https://www.cnblogs.com/linuxAndMcu/p/11022532.html",
+        "tags": [
+          "Linux",
+          "环境变量",
+          "基础"
+        ]
+      }
+    ],
     "python": [
+      {
+        "title": "变量的作用域：函数里的变量和外面的不是同一个",
+        "summary": "函数里定义的变量是'局部'的，函数一结束就没了；函数外定义的叫'全局'变量。函数里能读全局变量，但想改它必须声明 global——否则 Python 会当你在新建一个局部变量。",
+        "reason": "写函数必踩的坑：'我在函数里改了变量，外面怎么没变？'——因为压根是两个变量。写渗透脚本时（比如在函数里统计爆破成功次数）这个坑必现。",
+        "url": "https://www.freecodecamp.org/chinese/news/python-global-variables-examples/",
+        "tags": [
+          "函数",
+          "作用域",
+          "变量"
+        ]
+      },
       {
         "title": "函数是什么：把步骤打包成'工具'",
         "summary": "函数给一堆代码起个名字，以后喊名字就能执行。def 加法(a, b): return a + b——调用'加法(1,2)'得 3。不用重复写同样的代码。",
@@ -16,11 +73,46 @@
         ]
       }
     ],
-    "websec": [],
-    "vuln": [],
+    "websec": [
+      {
+        "title": "序列化/反序列化：为什么'还原数据'会执行代码",
+        "summary": "序列化 = 把内存里的对象打包成一串字节（存文件/传网络）；反序列化 = 把字节还原成对象。危险在于：如果打包的数据里藏着'要执行的指令'（比如 Python 的 __reduce__），load 还原的那一刻代码就跑了——你还没碰数据，程序先中招。这就是 TeamCity 漏洞的根因。",
+        "reason": "高级配基础：今天推的 TeamCity CVE 就是反序列化漏洞，也是你里程碑 1 的正面教材。先搞懂'序列化是什么、危险在哪'，以后看 pickle 调用链就不懵。官方中文文档先收藏。",
+        "url": "https://docs.python.org/zh-cn/dev/library/pickle.html",
+        "tags": [
+          "反序列化",
+          "原理",
+          "里程碑"
+        ]
+      }
+    ],
+    "vuln": [
+      {
+        "title": "CVE-2026-63077：JetBrains TeamCity 未授权 RCE 被在野利用",
+        "summary": "TeamCity（CI/CD 服务器）通过 agent 轮询协议接收 XML 时做了不安全的反序列化，攻击者无需登录即可构造 gadget 链达成 RCE，CVSS 9.8。8 月 5 日被 CISA 列入 KEV（要求 8 月 8 日前修补），Rapid7 已给出完整根因分析。",
+        "reason": "这是你里程碑'看懂 pickle 反序列化调用链'的 Java 实战版——原理完全一样：反序列化不可信数据 → 代码执行。先看 Rapid7 分析感受一下'gadget 链'长什么样，再回 websec 分类补基础。",
+        "url": "https://www.rapid7.com/blog/post/ra-unauthenticated-rce-in-jetbrains-teamcity-cve-2026-63077/",
+        "tags": [
+          "CVE",
+          "RCE",
+          "反序列化"
+        ]
+      }
+    ],
     "intranet": [],
     "ctf": [],
     "tools": [],
-    "thinking": []
+    "thinking": [
+      {
+        "title": "里程碑 1 的第一块砖：反序列化",
+        "summary": "你的第一个'掌握级'目标是看懂 pickle 反序列化调用链。今天推的 TeamCity 漏洞就是同一原理的实战版——现在学的每个函数知识点，都在为看懂它铺路。",
+        "reason": "把今天的漏洞情报接回你的学习路线：推送不是看热闹，每条高级内容都配了基础拆解，这就是'为什么选它'的意义。",
+        "tags": [
+          "里程碑",
+          "反序列化",
+          "路线"
+        ]
+      }
+    ]
   }
 }

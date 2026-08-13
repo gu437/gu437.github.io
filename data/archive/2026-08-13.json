@@ -1,26 +1,99 @@
 {
   "date": "2026-08-13",
-  "updateTime": "2026-08-13T11:04:35+08:00",
+  "updateTime": "2026-08-13T12:10:00+08:00",
   "categories": {
-    "today": [],
-    "network": [],
-    "linux": [],
-    "python": [
+    "today": [
       {
-        "title": "函数是什么：把步骤打包成'工具'",
-        "summary": "函数给一堆代码起个名字，以后喊名字就能执行。def 加法(a, b): return a + b——调用'加法(1,2)'得 3。不用重复写同样的代码。",
-        "reason": "对话沉淀：你今天问'什么函数啊，从0学起'——函数是你的分水岭，先给大白话总览，系统学习时深入。",
-        "tags": [
-          "函数",
-          "对话沉淀"
-        ]
+        "title": "今日漏洞：Metabase 密码重置接口的 SQL 注入正在被利用",
+        "summary": "数据分析平台 Metabase 的\"忘记密码\"接口（/api/session/reset_password）不用登录就能访问，攻击者在请求里塞一段 SQL 代码，服务器直接拼进数据库查询执行——能把管理员密码改成自己的，再以管理员身份登录（CVE-2026-72898，CVSS 10.0）。官方确认已在野外被利用，自建实例要赶紧升级。",
+        "reason": "这是\"输入校验缺失导致注入\"的活教材，SQL 注入正是你 Web 安全路线里最经典的漏洞类型。今天先眼熟它，websec 分类有配套原理。",
+        "url": "https://avd.aliyun.com/detail?id=AVD-2026-72898",
+        "tags": ["今日", "CVE", "SQL注入"]
+      },
+      {
+        "title": "今日主线：函数的参数——函数怎么接收\"输入\"",
+        "summary": "函数不只是把代码打包，还能接收外部传进来的\"输入\"（参数）。def 加法(a, b): 里的 a、b 就是参数，调用 加法(1,2) 时 1 和 2 就传进去。参数让同一个函数能处理不同的数据。",
+        "reason": "昨天讲了函数是什么（打包代码）+ 作用域，今天是函数章节第三块拼图：参数。写渗透工具时，爆破函数、解析函数全靠参数接收目标地址和字典。",
+        "url": "https://www.liaoxuefeng.com/books/python/function/parameter/index.html",
+        "tags": ["今日", "函数", "参数"]
       }
     ],
-    "websec": [],
-    "vuln": [],
+    "network": [
+      {
+        "title": "DNS：把域名翻译成 IP 的\"电话本\"",
+        "summary": "你敲 gu437.github.io，电脑不知道去哪，先问 DNS 服务器：\"这个域名对应的 IP 是多少？\"DNS 查完告诉你 IP，浏览器才去连。整个互联网的域名都靠 DNS 分级管理。",
+        "reason": "网络线昨天补了 HTTP（应用层怎么说话），今天是 DNS——Web 安全里 DNS 劫持、钓鱼、C2 域名全基于它。先搞懂\"域名怎么变成 IP\"，后面看攻击手法不懵。",
+        "url": "https://www.cnblogs.com/zdns/p/11728097.html",
+        "tags": ["网络", "DNS", "基础"]
+      }
+    ],
+    "linux": [
+      {
+        "title": "chmod：Linux 文件权限的\"门锁\"",
+        "summary": "Linux 里每个文件都带权限：谁能读(r)、谁能写(w)、谁能执行(x)。chmod 777 文件名 是\"所有人随便操作\"，chmod 644 是\"只有主人能改，别人只能看\"。权限给太宽，网站就会出安全漏洞。",
+        "reason": "接昨天 PATH（命令从哪来），今天是文件权限——Linux 路线第二格。以后部署渗透工具、看靶场题\"为什么这个文件要 777\"，都离不开它。",
+        "url": "https://www.cnblogs.com/miracle-luna/p/18301004",
+        "tags": ["Linux", "权限", "基础"]
+      }
+    ],
+    "python": [
+      {
+        "title": "函数返回值的技巧：return 的三种用法",
+        "summary": "return 不只是\"返回结果\"：可以一次返回多个值（自动打包成元组）、可以提前 return 结束函数、不写 return 就默认返回 None。写函数时想清楚\"返回什么\"，代码才好用。",
+        "reason": "函数是什么 + 参数 + 返回值，函数章节三块拼图今天凑齐。写工具函数时返回值设计不好，后面所有调用处都要跟着改。",
+        "url": "https://www.piglei.com/articles/function-returning-tips/",
+        "tags": ["函数", "返回值"]
+      },
+      {
+        "title": "函数精讲视频：7 集跟练，手机直接看",
+        "summary": "视频版函数教程：函数定义、调用注意事项、参数类型、不定长参数、返回值、函数嵌套，7 集分集讲，适合边看边跟练。",
+        "reason": "文字看累了换视频跟一遍，手机端直接能看。函数的\"为什么存在\"（把重复逻辑打包、让代码可复用）视频里讲得更直观。",
+        "url": "https://www.bilibili.com/video/BV18841147Vw/",
+        "tags": ["函数", "视频"]
+      }
+    ],
+    "websec": [
+      {
+        "title": "SQL 注入的原因、本质及防御",
+        "summary": "SQL 注入 = 程序把用户输入直接拼进 SQL 语句。比如 select * from users where id= 后面直接接用户输入，攻击者输入 \"1 or 1=1\" 就变成查所有用户。本质是\"没分清数据和代码\"。",
+        "reason": "高级配基础：今天推的 Metabase 漏洞就是 SQL 注入实战版——它的密码重置接口把攻击者给的 user-id 直接当 SQL 编译执行。这篇把原因讲透，看完就懂 Metabase 为什么中招。",
+        "url": "https://www.cnblogs.com/JonaLin/p/13221251.html",
+        "tags": ["Web安全", "SQL注入", "原理"]
+      },
+      {
+        "title": "Python 序列化与反序列化：pickle 和 json 在干嘛",
+        "summary": "序列化 = 把内存里的对象变成一串字节或文本（存文件、传网络）；反序列化 = 还原成对象。pickle 是 Python 专属二进制格式，json 是跨语言文本格式。危险点：反序列化不可信数据可能执行代码。",
+        "reason": "高级配基础：fastjson 漏洞（vuln 分类）就是\"JSON 反序列化执行代码\"。这篇讲清 pickle/json 的区别，正好接你里程碑 1\"看懂 pickle 反序列化调用链\"。",
+        "url": "https://www.cnblogs.com/yinzhengjie/p/11149063.html",
+        "tags": ["Web安全", "序列化", "里程碑"]
+      }
+    ],
+    "vuln": [
+      {
+        "title": "CVE-2026-72898：Metabase 未授权 SQL 注入，满分漏洞被在野利用",
+        "summary": "漏洞在无需登录的密码重置接口 /api/session/reset_password：攻击者在 JSON 请求体里多加一个 user-id 字段，传一段 HoneySQL {:raw \"SQL\"} 对象，服务器没校验类型就把它编译成 SQL 执行——直接选一个管理员账号、把密码改成自己的。CVSS 10.0，官方确认已用于攻击 Metabase Cloud。",
+        "reason": "昨天的 TeamCity 是反序列化，今天是 SQL 注入——两类最经典漏洞连续出现。这篇 bishopfox 分析把\"为什么存在\"拆成三个失败点（接口不用登录 + 用户输入直接进 SQL + 没做类型校验），值得细读。",
+        "url": "https://www.bishopfox.com/blog/critical-sql-injection-in-metabase-via-password-reset-cve-2026-72898",
+        "tags": ["CVE", "SQL注入", "在野利用"]
+      },
+      {
+        "title": "fastjson 1.2.68–1.2.83 远程代码执行漏洞（CVE-2026-16723）",
+        "summary": "fastjson（Java 最常用的 JSON 解析库）1.x 老版本有个漏洞：解析用户可控的 JSON 时会去探测里面写的类名（checkAutoType 用 getResourceAsStream），攻击者精心构造就能触发远程代码执行。官方公告：fastjson2 不受影响，1.x 需升级。",
+        "reason": "这是\"反序列化漏洞\"的经典案例（Java 版），和你里程碑 1 的 pickle 原理同源：解析不可信数据时执行了不该执行的逻辑。先记住\"fastjson\"这个名字，以后到处都能见到。",
+        "url": "https://github.com/alibaba/fastjson2/wiki/Security-Advisory:-Remote-Code-Execution-in-fastjson-1.2.68%E2%80%931.2.83",
+        "tags": ["CVE", "RCE", "反序列化"]
+      }
+    ],
     "intranet": [],
     "ctf": [],
     "tools": [],
-    "thinking": []
+    "thinking": [
+      {
+        "title": "两个满分漏洞的共同点：不信任输入",
+        "summary": "今天两个漏洞（Metabase SQL 注入、fastjson RCE）本质是同一件事：程序把用户给的数据当成了\"代码/命令\"来执行。安全的核心思维就是——所有外部输入都不可信，先校验再使用。",
+        "reason": "这正是你\"边界思维\"弱项的训练：只测正常路径看不到漏洞，攻击者专挑\"异常输入\"下手。学函数参数时也带着这个视角：参数就是函数的\"外部输入\"，也要想\"传进来的不是预期值会怎样\"。",
+        "tags": ["思考", "输入校验", "边界思维"]
+      }
+    ]
   }
 }

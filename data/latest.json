@@ -1,16 +1,99 @@
 {
   "date": "2026-08-16",
-  "updateTime": "2026-08-16T08:00:27+08:00",
+  "updateTime": "2026-08-16T08:30:00+08:00",
   "categories": {
-    "today": [],
-    "network": [],
-    "linux": [],
-    "python": [],
-    "websec": [],
-    "vuln": [],
+    "today": [
+      {
+        "title": "今日漏洞：VMware vCenter 日志服务目录遍历 → 服务器被黑（CVE-2026-59310）",
+        "summary": "vCenter 是 VMware 家管虚拟机的\"总控制台\"，很多企业的服务器都靠它管。漏洞出在它的 Syslog 日志服务：程序拼文件路径时没过滤 \"../\" 这种跳转符，攻击者把路径一路往上跳，就能写到不该写的地方，最终在服务器上执行任意代码（CVSS 9.8）。更吓人的是：8 月 3 日起就有 APT 组织在野外批量打它，360+ 台受害服务器、遍布 47 国，打完还植入反向 shell 和定时任务保持长期控制。",
+        "reason": "高级配基础：目录遍历是\"输入校验缺失\"家族的经典成员（和你学过的 SQL 注入同根因），websec 分类有配套原理拆解。真实在野利用案例让你明白为什么补丁要第一时间打——黑客动手比你想的快得多。",
+        "url": "https://thehackernews.com/2026/08/attackers-exploit-vmware-vcenter.html",
+        "tags": ["今日", "CVE", "在野利用"]
+      },
+      {
+        "title": "今日主线：lambda 匿名函数——函数章节收尾",
+        "summary": "lambda 就是\"不取名字的函数\"：lambda x: x * 2 等价于 def f(x): return x * 2，但只能写一行、只能有一个表达式。为什么存在？因为它经常被当\"参数\"传给别的函数（比如告诉 sorted 按什么规则排序），临时用一下，不值得专门起个名字。",
+        "reason": "函数章节拼图最后一块（是什么→作用域→参数→返回值→递归→lambda）。lambda 是\"函数可以当参数传\"这个思想的入门，以后学 map/filter/sorted、写扫描脚本处处用得上。",
+        "url": "https://liaoxuefeng.com/books/python/functional/lambda/index.html",
+        "tags": ["今日", "函数", "lambda"]
+      }
+    ],
+    "network": [
+      {
+        "title": "端口到底是什么：一台电脑怎么同时开 65535 个\"门\"",
+        "summary": "IP 地址找到电脑，端口找到电脑上的具体程序。就像一栋楼（IP）里的一个个门牌号（端口）：80 是网页、443 是加密网页、22 是 SSH 远程登录。一条 TCP 连接由\"四个数\"唯一确定：源 IP + 源端口 + 目的 IP + 目的端口（四元组）。这也是 nmap 扫描的原理基础——它就是在挨个敲门，看哪个门开着。",
+        "reason": "网络路线下一格（TCP→HTTP→DNS→端口/套接字），和 08-14 推的 nmap 直接衔接：理解端口 = 理解扫描器在扫什么 = 以后自己写端口扫描脚本的原理。",
+        "url": "https://kanonjz.github.io/2017/12/10/%E7%90%86%E8%A7%A3%E5%A5%97%E6%8E%A5%E5%AD%97/",
+        "tags": ["网络", "端口", "基础"]
+      }
+    ],
+    "linux": [
+      {
+        "title": "Linux 目录结构：/etc /var /tmp 这些目录到底是干嘛的",
+        "summary": "Linux 所有文件从根 / 长成一棵树，每个目录分工明确：/etc 放系统配置、/home 放用户文件、/tmp 放临时文件（谁都能写！）、/var 放日志等会变的数据、/proc 是\"假的目录\"（实时反映运行中的进程）。知道哪个目录装什么，是排查问题、找攻击痕迹的第一步。",
+        "reason": "Linux 路线下一格（权限→PATH→chmod→进程→目录结构）。安全映射：/tmp 全局可写 = 攻击者爱放临时工具的地方；/var/log 是查入侵痕迹的地方——正好接住今天漏洞里\"写文件到系统目录\"的原理。",
+        "url": "https://www.cnblogs.com/Rare-30/p/19007049",
+        "tags": ["Linux", "目录结构", "基础"]
+      }
+    ],
+    "python": [
+      {
+        "title": "间隔复习（第 3 天）：函数参数——闭卷写一遍",
+        "summary": "8 月 13 日学的函数参数。先别翻笔记，闭卷回答：① 形参和实参的区别？② 位置参数、默认参数、关键字参数各自怎么传？③ 写一个 def 打招呼(name, 语气=\"你好\")，分别用三种方式调用它。写不出来再翻 08-13 的原文对照。",
+        "reason": "分布式复习：今天到 3 天复习期。参数是函数章节的核心地基，lambda 的参数写法就是函数参数——正好衔接今日主线。复习 = 闭卷回忆，不是重读。",
+        "tags": ["复习", "函数", "检索练习"]
+      },
+      {
+        "title": "lambda 精讲 + 自测：把 def 函数改写成一行",
+        "summary": "廖雪峰版 lambda 讲解：lambda x: x*x 的冒号左边是参数、右边是返回的表达式。练习：① 把 def 双倍(n): return n*2 改写成 lambda；② 用 lambda 写\"判断偶数\"返回 True/False；③ 边界题：lambda 里能不能写多行 if...else 逻辑？为什么？（提示：它只能有一个表达式）。",
+        "reason": "今日主线配套精讲。lambda 是\"函数对象\"思维的入口——以后学 sort(key=...)、map/filter 全都要它。边界题训练\"为什么只能一个表达式\"的理解深度，答得出原因才是真懂。",
+        "url": "https://liaoxuefeng.com/books/python/functional/lambda/index.html",
+        "tags": ["函数", "lambda", "自测"]
+      }
+    ],
+    "websec": [
+      {
+        "title": "目录遍历（路径穿越）：为什么 '../' 能溜出网站目录",
+        "summary": "网站让你下载文件 /files/xxx.pdf，服务器就把\"文件名\"拼到路径后面去磁盘上找。如果没过滤，你传 /files/../../../../etc/passwd，路径一路往上跳，就能读到服务器上的系统文件（密码、配置、源码）。这就是今天 vCenter 漏洞的类型。防御：白名单 + 校验规范化后的路径必须落在允许目录内。",
+        "reason": "今日漏洞（CVE-2026-59310）的降维配套——把高级漏洞拆成原理。目录遍历 = \"不信任输入\"家族新成员（SQL 注入、XSS 同根因），补上知识地图 Web 安全一格。",
+        "url": "https://websec.readthedocs.io/zh/latest/vuln/pathtraversal.html",
+        "tags": ["Web安全", "目录遍历", "原理"]
+      },
+      {
+        "title": "CSRF：我没点转账，钱怎么没了",
+        "summary": "CSRF = 攻击者让你浏览器\"替你做你不想做的事\"。原理：你已登录银行网站（浏览器带着你的 Cookie），攻击者网页里藏一个 <img src=\"转账接口?to=黑客&金额=1000\">，你一点开图片，浏览器就自动带着你的登录凭证向银行发了转账请求——银行只认 Cookie，不认\"是不是你本人点的\"。防御：加 CSRF Token（请求里带一个只有你页面才有的随机数，攻击者页面拿不到）。",
+        "reason": "Web 安全基础线下一步（注入/序列化/XSS 之后）。CSRF 和 XSS 常被搞混，放一起对比记忆最牢：XSS 偷你的凭证，CSRF 借你的凭证。",
+        "url": "https://www.cnblogs.com/smileleooo/p/18075940",
+        "tags": ["Web安全", "CSRF", "原理"]
+      }
+    ],
+    "vuln": [
+      {
+        "title": "CVE-2026-59310 + CVE-2026-59309：vCenter 两个 9.8 分漏洞，目录遍历 RCE + 认证绕过",
+        "summary": "两个漏洞都在 VMware vCenter（企业管虚拟机的控制台）。CVE-2026-59310：Syslog 日志服务的目录遍历，网络可达的攻击者无需登录就能执行任意代码（CVSS 9.8）。CVE-2026-59309：VMware Directory Service 认证绕过（CVSS 9.8），绕过登录直接进管理平面。Broadcom 7 月底发补丁（VMSA-2026-0006），8 月初就有人在野外打——Quirso 组织用反向 shell 长期驻留，还改 cron 保活。",
+        "reason": "今日漏洞详情版。看\"补丁发布→利用爆发\"的窗口期就是真实攻防节奏，通常只有几天。先看 websec 分类的目录遍历原理，再看这个 CVE 就能看懂一半。",
+        "url": "https://www.rapid7.com/blog/post/etr-critical-vmware-vcenter-vulnerabilities-allow-authentication-bypass-and-remote-code-execution-cve-2026-59309-cve-2026-59310/",
+        "tags": ["CVE", "RCE", "在野利用"]
+      }
+    ],
     "intranet": [],
     "ctf": [],
-    "tools": [],
-    "thinking": []
+    "tools": [
+      {
+        "title": "sqlmap 入门：一条命令测 SQL 注入",
+        "summary": "sqlmap 是自动化 SQL 注入检测/利用工具：sqlmap -u \"http://目标/?id=1\" 就能自动判断这个参数有没有注入点，有的话还能自动拖数据库、读文件。08-13 你学了 SQL 注入原理，现在看工具怎么把\"手工判断\"自动化。",
+        "reason": "tools 分类下一步（进度表：SQL 注入学完配套 sqlmap）。原理在前、工具在后——先懂原理再用工具，才不会被工具牵着走。",
+        "url": "https://www.cnblogs.com/pursue-security/p/15355415.html",
+        "tags": ["工具", "sqlmap", "SQL注入"]
+      }
+    ],
+    "thinking": [
+      {
+        "title": "'Exploited in the Wild'：为什么\"已被黑客打过\"比 CVSS 分数重要",
+        "summary": "一个漏洞被公开，CVSS 9.8 只是\"理论危险程度\"；但\"已被黑客在真实世界打过\"（in the wild）才是\"正在死人\"的信号。今天 vCenter 漏洞就是活例子：7 月底出补丁，8 月 3 日就被 APT 批量打，360+ 台服务器中招。安全公告里标 in the wild 的是补丁优先级最高的一档——先修它，别管分数。你以后做蓝队/应急，第一反应看这条；做红队，这也是学攻击手法的活教材。",
+        "reason": "今天漏洞的元认知配套：教你怎么\"读\"漏洞情报（vuln 分类的阅读方法），把单个 CVE 变成可迁移的判断力。",
+        "tags": ["思考", "方法论", "漏洞情报"]
+      }
+    ]
   }
 }

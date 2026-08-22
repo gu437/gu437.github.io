@@ -1,16 +1,263 @@
 {
   "date": "2026-08-22",
-  "updateTime": "2026-08-22T08:00:02+08:00",
+  "updateTime": "2026-08-22T08:16:25+08:00",
   "categories": {
-    "today": [],
-    "network": [],
-    "linux": [],
-    "python": [],
-    "websec": [],
-    "vuln": [],
-    "intranet": [],
-    "ctf": [],
-    "tools": [],
-    "thinking": []
+    "today": [
+      {
+        "title": "📌 微软 8 月补丁日：415 个漏洞，其中 1 个已被黑客用上了",
+        "summary": "8 月 11 日微软发布安全更新，一口气修了 415 个漏洞，62 个是最高危级别，其中还有 1 个“零日”漏洞已被黑客实际利用（CVE-2026-68820）。零日 = 厂商还没来得及修、攻击者就已经在打。",
+        "reason": "漏洞情报是安全圈的“新闻联播”：看懂补丁日，你就知道攻击者现在在打什么。这是 vuln 分类的主线，也是你以后写工具的“需求来源”。",
+        "url": "https://www.crowdstrike.com/en-us/blog/patch-tuesday-analysis-august-2026/",
+        "tags": [
+          "漏洞情报",
+          "微软",
+          "补丁日"
+        ]
+      },
+      {
+        "title": "🎯 TeamCity 反序列化 RCE（CVSS 9.8）：离你最近的“里程碑级”漏洞",
+        "summary": "JetBrains TeamCity（CI 构建服务器）爆出严重漏洞：攻击者不需要登录，发一个精心构造的请求就能远程执行任意代码。本质是“反序列化不可信数据”（CWE-502），官方确认已被利用。",
+        "reason": "这正好踩在你的第一个里程碑上：看懂 pickle 反序列化调用链。先看今天 Python 分类里的 pickle 原理文章，再回来看这条，原理就闭环了。",
+        "url": "https://www.163.com/dy/article/L3M6C4NS0511A5GF.html",
+        "tags": [
+          "反序列化",
+          "RCE",
+          "里程碑"
+        ]
+      },
+      {
+        "title": "🔓 Redis 认证 RCE 漏洞（QVD-2026-44936）：内网打点的老朋友",
+        "summary": "奇安信 8 月 13 日监测到 Redis 认证相关的远程代码执行漏洞，技术细节及 PoC 已公开。Redis 是几乎每个公司都有的“内存数据库”，它的认证/未授权问题一直是渗透里最经典的入口之一。",
+        "reason": "外网打点→内网横跳的标配目标。今天 intranet 分类配了 Redis 未授权访问复现，两篇连起来看，从原理到利用一步到位。",
+        "url": "https://ti.qianxin.com/vulnerability/notice-list",
+        "tags": [
+          "Redis",
+          "RCE",
+          "内网"
+        ]
+      }
+    ],
+    "network": [
+      {
+        "title": "TCP 三次握手、四次挥手：35 张图把“为什么”讲透",
+        "summary": "建立连接要握 3 次手，断开要挥 4 次手。为什么不能是 2 次？为什么挥手一定要 4 次？小林 coding 用 35 张图解加生活比喻讲清楚。",
+        "reason": "计算机网络你已经学过，但“为什么三次不是两次”这类原理题才是理解的试金石——看图回忆一遍，比重读笔记有效得多。",
+        "url": "https://www.cnblogs.com/xiaolincoding/p/12638546.html",
+        "tags": [
+          "TCP",
+          "计算机网络",
+          "图解"
+        ]
+      }
+    ],
+    "linux": [
+      {
+        "title": "Linux 教程（菜鸟教程）：从零认识这个渗透主战场",
+        "summary": "Linux 是什么、目录结构长啥样、最常用的命令怎么敲，一套系统的中文入门教程，边看边在虚拟机里敲。",
+        "reason": "Linux 是你知识地图上“未知待测”的一格，但渗透工具几乎全跑在 Linux 上，早晚要补。从这套开始，目标：能自己建文件、改权限、看进程。",
+        "url": "https://www.runoob.com/linux/linux-tutorial.html",
+        "tags": [
+          "Linux",
+          "基础",
+          "教程"
+        ]
+      },
+      {
+        "title": "【全 31 集】一口气学完 Linux 基础与常用命令",
+        "summary": "B 站 31 集短视频，把 Linux 基础概念和常用命令完整过一遍，适合跟着敲。",
+        "reason": "视频+动手是 Linux 入门最不劝退的组合。看完菜鸟教程的文字版，再用视频巩固一遍，命令要自己敲出来才算数。",
+        "url": "https://www.bilibili.com/video/BV1FuvpBJEcv/",
+        "tags": [
+          "Linux",
+          "命令",
+          "视频"
+        ]
+      }
+    ],
+    "python": [
+      {
+        "title": "廖雪峰 Python 教程·函数章节：你现在的分水岭",
+        "summary": "为什么要有函数（把重复代码抽象出来）、怎么定义和调用、参数怎么传、递归是什么。函数是 Python 从“抄代码”到“写代码”的分水岭。",
+        "reason": "你正卡在这一章。函数是以后写渗透脚本的骨架——爆破脚本、解析脚本全是函数的组合。验收标准：不看答案能自己写一个带默认参数和返回值的函数并跑通。",
+        "url": "https://liaoxuefeng.com/books/python/function/index.html",
+        "tags": [
+          "Python",
+          "函数"
+        ]
+      },
+      {
+        "title": "pickle 反序列化漏洞：Python 自带的“打包工具”为什么会变成后门",
+        "summary": "pickle 能把 Python 对象打包成字节流存起来、再解包还原。但它解包时可能自动执行代码——只要对象里藏了 __reduce__ 魔法方法。这篇把原理和绕过讲清楚。",
+        "reason": "你的里程碑 1 就是“看懂 pickle 反序列化调用链”。这篇是配套教材：学完函数和魔法方法，正好用它接上真实漏洞（今天的 TeamCity 就是同类问题）。",
+        "url": "https://zhuanlan.zhihu.com/p/688817941",
+        "tags": [
+          "Python",
+          "反序列化",
+          "漏洞原理"
+        ]
+      },
+      {
+        "title": "零基础小白速通 Python 函数进阶（B 站 11 集）",
+        "summary": "函数参数的各种玩法（默认参数、万能参数）、作用域、返回值，11 集短视频速通。",
+        "reason": "函数章节卡在参数上很正常，换个讲法可能就通了。看完记得自己敲一遍，别只“看会了”。",
+        "url": "https://www.bilibili.com/video/BV18oUGBkEZt/",
+        "tags": [
+          "Python",
+          "函数",
+          "视频"
+        ]
+      }
+    ],
+    "websec": [
+      {
+        "title": "阮一峰：JSON Web Token（JWT）入门教程",
+        "summary": "JWT 就是服务器发给你的一张“带签名的身份证”：登录后服务器把身份信息签个名发给你，以后每次请求出示就行，服务器不用存会话。",
+        "reason": "本月微软修的 SharePoint JWT 认证绕过漏洞（CVE-2026-55040）就是 JWT 校验出错。先懂原理再看漏洞——这就是“为什么存在”的学习方式。",
+        "url": "https://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html",
+        "tags": [
+          "Web安全",
+          "JWT",
+          "认证"
+        ]
+      },
+      {
+        "title": "Session、Token、JWT 到底是什么？万字图解一次搞懂",
+        "summary": "三种登录态方案横向对比：服务器记小本本（Session）、发通行证（Token）、带签名身份证（JWT），各自为什么存在、有什么坑。",
+        "reason": "Web 安全你已经系统学过，这篇帮你把认证体系串成一张图——面试和看漏洞通告都用得上。",
+        "url": "https://zhuanlan.zhihu.com/p/1939279347979654149",
+        "tags": [
+          "Web安全",
+          "认证",
+          "图解"
+        ]
+      }
+    ],
+    "vuln": [
+      {
+        "title": "微软 8 月补丁日深度分析（CrowdStrike）",
+        "summary": "415 个 CVE、62 个 Critical、1 个已遭利用零日 + 3 个公开零日。CrowdStrike 按“是否已被利用”帮你排了修复优先级。",
+        "reason": "安全分析师每周的必修课。重点看“已遭利用”的漏洞——那才是攻击者正在用的。",
+        "url": "https://www.crowdstrike.com/en-us/blog/patch-tuesday-analysis-august-2026/",
+        "tags": [
+          "漏洞情报",
+          "Patch Tuesday",
+          "微软"
+        ]
+      },
+      {
+        "title": "JetBrains TeamCity 未授权反序列化 RCE（CVE-2026-63077）",
+        "summary": "CVSS 9.8 分：未认证攻击者通过 Agent 轮询协议发送特制数据，触发反序列化，以服务进程权限执行任意代码。官方确认已被黑客利用。",
+        "reason": "CWE-502 反序列化漏洞的活教材。今天 Python 分类的 pickle 文章就是它的“原理课”，两篇配对看，正好迈向里程碑 1 的“看懂调用链”。",
+        "url": "https://www.163.com/dy/article/L3M6C4NS0511A5GF.html",
+        "tags": [
+          "漏洞情报",
+          "反序列化",
+          "RCE"
+        ]
+      },
+      {
+        "title": "Redis 认证远程代码执行漏洞（QVD-2026-44936）",
+        "summary": "奇安信 8/13 发布：Redis 认证相关 RCE 漏洞，技术细节与 PoC 已公开。Redis 是内网高频组件，这类洞打点价值极高。",
+        "reason": "内网渗透课的预习材料。配 intranet 分类的“Redis 未授权访问复现”一起看，从原理到利用一步到位。",
+        "url": "https://ti.qianxin.com/vulnerability/notice-list",
+        "tags": [
+          "漏洞情报",
+          "Redis"
+        ]
+      },
+      {
+        "title": "CISA KEV：8/21 又新增 8 个“正在被利用”的漏洞",
+        "summary": "美国 CISA 官方维护的“已知被利用漏洞目录”，8 月 21 日新增 8 个 CVE——都是确认被黑客实际利用过的漏洞。",
+        "reason": "判断“哪些漏洞真的在被打”的最权威清单，做安服、护网必看。收藏它，每周刷一遍。",
+        "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "tags": [
+          "漏洞情报",
+          "CISA",
+          "KEV"
+        ]
+      }
+    ],
+    "intranet": [
+      {
+        "title": "Redis 未授权访问漏洞复现：从 0 到 getshell",
+        "summary": "很多 Redis 默认没设密码、绑在公网，攻击者连上去就能用 config 命令写文件——最经典的打法是把 SSH 公钥写进服务器，直接免密登录。文章带完整复现步骤。",
+        "reason": "内网渗透是你知识地图的空白格，Redis 未授权是经典第一课。看完今天 vuln 分类的 Redis 通告再动手复现，理解会深一层。",
+        "url": "https://www.cnblogs.com/yuzly/p/11663822.html",
+        "tags": [
+          "内网",
+          "Redis",
+          "复现"
+        ]
+      }
+    ],
+    "ctf": [
+      {
+        "title": "Hello CTF：从零开始拿下你的第一面 flag",
+        "summary": "专为纯小白设计的 CTF 入门站：题目类型科普、解题工具、新手赛日历一应俱全，还带可动手的在线练习。",
+        "reason": "CTF 是“以赛代练”最好的方式。这个站就是零基础友好设计，直接开练。",
+        "url": "https://hello-ctf.com/",
+        "tags": [
+          "CTF",
+          "入门"
+        ]
+      },
+      {
+        "title": "CTF 零基础小白入门指南（含靶场清单）",
+        "summary": "一篇讲清 CTF 有哪些题型（Web/逆向/密码学/杂项）、各题型怎么入门，附 DVWA、sqli-labs 等必练靶场清单。",
+        "reason": "动手前先建立全局地图：知道有哪些题型、练什么靶场，不迷路。",
+        "url": "https://zhuanlan.zhihu.com/p/673321041",
+        "tags": [
+          "CTF",
+          "入门",
+          "靶场"
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "title": "Burp Suite 实战指南：Web 渗透的“吃饭家伙”",
+        "summary": "Burp 是抓包、改包、重放的头号工具。这本中文实战指南从代理设置讲到漏洞利用，边用边查。",
+        "reason": "你的 Web 安全学过，但工具链要熟。Burp 是以后挖 SRC 的日常工具，趁现在把工具链磨起来。",
+        "url": "https://t0data.gitbooks.io/burpsuite/content/",
+        "tags": [
+          "工具",
+          "BurpSuite",
+          "Web安全"
+        ]
+      },
+      {
+        "title": "Anki：把“间隔重复”变成自动化的免费软件",
+        "summary": "把知识点做成卡片，Anki 按遗忘曲线自动安排复习时间：1 天、3 天、1 周、1 月……到点自动提醒你回忆。",
+        "reason": "你的学习循环第 5 步就是“1/3/7/30 天间隔复习”。用 Anki 落地它，配合 thinking 分类的两篇学习方法文章。",
+        "url": "https://apps.ankiweb.net/",
+        "tags": [
+          "工具",
+          "间隔重复",
+          "学习方法"
+        ]
+      }
+    ],
+    "thinking": [
+      {
+        "title": "检索练习：为什么“看会了”不等于“学会了”",
+        "summary": "反复读课本、划线、摘抄其实是最没用的学习方式；真正有效的是“闭卷回忆”——考试、自测、讲给别人听。这叫检索练习，效果比重读好 2 倍以上。",
+        "reason": "你的每日学习站就是按这个原理设计的：每篇内容看完，合上屏幕自己回忆 summary 讲了啥，想不起来再回来看。",
+        "url": "https://zhuanlan.zhihu.com/p/161825358",
+        "tags": [
+          "学习方法",
+          "检索练习"
+        ]
+      },
+      {
+        "title": "如何记住任何东西：间隔重复实操指南",
+        "summary": "把复习时间拉开而不是突击：1 天后、3 天后、1 周后、1 月后各复习一次，记忆留存能从 20% 拉到 90%。",
+        "reason": "配合 Anki 落地你的复习表。学完函数章节后，按这个节奏安排 1/3/7/30 天闭卷回忆。",
+        "url": "https://dailyup.blog/posts/spaced-repetition-practice/",
+        "tags": [
+          "学习方法",
+          "间隔重复"
+        ]
+      }
+    ]
   }
 }

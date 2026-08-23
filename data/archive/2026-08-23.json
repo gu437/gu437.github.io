@@ -1,16 +1,133 @@
 {
   "date": "2026-08-23",
-  "updateTime": "2026-08-23T08:00:19+08:00",
+  "updateTime": "2026-08-23T08:15:00+08:00",
   "categories": {
-    "today": [],
-    "network": [],
-    "linux": [],
-    "python": [],
-    "websec": [],
-    "vuln": [],
+    "today": [
+      {
+        "title": "🚨 微软 Entra ID 满分漏洞（CVSS 10.0）：云身份服务已被在野利用",
+        "summary": "微软给自家云身份服务 Entra ID 打了一个 CVSS 10.0（满分）的补丁：攻击者不需要账号就能远程执行代码。微软承认该漏洞已在野被利用，但因为跑在微软云端，官方已自动修复，用户不用做任何操作。满分 + 在野，双料头条。",
+        "reason": "这是\"认证/身份\"这条线的现实版：你学的 JWT、Cookie/Session（08-19/08-22 websec 分类）就是身份认证的实现，而云身份服务一旦被攻破 = 整个企业的登录入口被端。看新闻时想想\"它是怎么认证的\"，这就是把原理接到真实世界。",
+        "url": "https://thehackernews.com/2026/08/microsoft-entra-id-flaw-cvss-100.html",
+        "tags": [
+          "漏洞情报",
+          "微软",
+          "认证"
+        ]
+      },
+      {
+        "title": "🎯 SPIP 建站系统未授权 RCE：一个 HTTP 请求头就能执行任意代码",
+        "summary": "SPIP 是一个法国开源 CMS（建站系统），爆出 CVSS 9.8 漏洞：攻击者不用登录，只要在 HTTP 请求里塞一个叫 X-Spip-Filtre 的请求头，就能让服务器执行任意代码。4.4.21 以下版本全中招，官方确认 8 月已在野被利用。",
+        "reason": "这个漏洞的\"点\"特别适合你：它证明 HTTP 请求头也是攻击者完全可控的输入（很多人以为请求头是浏览器自动生成的，其实可以随便改）。今天 network 分类的 HTTP 基础 + thinking 分类的原理拆解就是它的降维教材。",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-77806",
+        "tags": [
+          "漏洞情报",
+          "RCE",
+          "在野利用"
+        ]
+      }
+    ],
+    "network": [
+      {
+        "title": "HTTP 请求方法与状态码：看懂浏览器和服务器在说什么（图解）",
+        "summary": "GET/POST 有什么区别、200/301/404/500 各代表什么，一篇带图解讲全。请求方法 = 你想干什么，状态码 = 服务器告诉你结果如何。",
+        "reason": "network 分类的下一步就是它。今天的 SPIP 漏洞就发生在\"请求头\"里——先把 HTTP 请求长什么样看明白，再看漏洞就知道攻击者往哪里塞东西了。",
+        "url": "https://www.cnblogs.com/hls-code/p/14964022.html",
+        "tags": [
+          "HTTP",
+          "计算机网络",
+          "图解"
+        ]
+      }
+    ],
+    "linux": [
+      {
+        "title": "find 与 grep：在 Linux 里\"找东西\"的两把刀",
+        "summary": "find 按文件名/大小/时间找文件，grep 按文件内容找文字，两者配合 = 无敌。文章带大量实用参数例子（-name、-size、-mtime、-r 递归）。",
+        "reason": "知识地图的 Linux 格刚开（08-22），下一步就是检索命令。渗透里这两把刀是命根子：find / -perm -4000 找 SUID 提权点（08-20 讲过）、grep -r 找配置文件里的密码。",
+        "url": "https://developer.aliyun.com/article/297471",
+        "tags": [
+          "Linux",
+          "命令",
+          "检索"
+        ]
+      }
+    ],
+    "python": [
+      {
+        "title": "Python 访问限制：私有属性为什么只是\"约定\"，不是\"围墙\"",
+        "summary": "在类里给属性名前加两个下划线（__name）就能\"藏起来\"，外部直接访问会报错。但真相是：Python 只是把 __name 悄悄改成了 _类名__name，用这个新名字照样能访问——Python 的私有是君子协定，不是强制。",
+        "reason": "类章节拼图的下一块（类与实例→继承→多态→访问限制）。这个\"为什么存在\"的答案很安全：语言不强制隐私，安全就永远不能靠\"约定\"（比如变量名前缀）来保证——真正的防线是服务端校验。自测变形题：为什么 obj.__name 报错，obj._Student__name 却能拿到值？",
+        "url": "https://liaoxuefeng.com/books/python/oop/access/index.html",
+        "tags": [
+          "Python",
+          "类",
+          "私有属性"
+        ]
+      }
+    ],
+    "websec": [
+      {
+        "title": "WebShell 一句话木马：为什么\"传个文件\"就能控制整个服务器",
+        "summary": "网站允许用户上传文件（头像、附件），但没检查文件内容——攻击者传上去的其实是代码（PHP 一句话木马），之后用工具连上去，服务器就成了他的。文章讲清木马原理 + 怎么连接控制。",
+        "reason": "websec 的下一步就是文件上传（WebShell）——三大经典漏洞（注入/序列化/XSS）之后的第一块新拼图。理解它 = 理解\"上传功能为什么是攻击面\"，也是以后打靶场必练的一课。",
+        "url": "https://cloud.tencent.com/developer/article/2078590",
+        "tags": [
+          "Web安全",
+          "文件上传",
+          "WebShell"
+        ]
+      }
+    ],
+    "vuln": [
+      {
+        "title": "CVE-2026-77806：SPIP 模板引擎\"请求头代码注入\"RCE 技术拆解",
+        "summary": "根因：SPIP 的模板渲染引擎把 HTTP 请求头 X-Spip-Filtre 里的内容当成 PHP 过滤器函数名，拼进对用户输入的处理链（analyse_resultat_skel），攻击者借此注入函数链执行任意代码。CVSS 9.8，未认证，4.4.21 之前版本全中招，8 月已在野。",
+        "reason": "和 08-11 推过的代码注入是同一家族：用户可控数据（这次是请求头）流进了代码执行路径。先看 thinking 分类的\"请求头也是输入\"再看这篇，原理就通了——这是\"看懂漏洞底层原理\"里程碑的日常训练。",
+        "url": "https://www.ionix.io/threat-center/cve-2026-77806/",
+        "tags": [
+          "漏洞情报",
+          "代码注入",
+          "RCE"
+        ]
+      }
+    ],
     "intranet": [],
-    "ctf": [],
-    "tools": [],
-    "thinking": []
+    "ctf": [
+      {
+        "title": "Bandit 第 4-6 关攻略：从\"找文件\"到\"找特殊文件\"",
+        "summary": "Level 4→5：inhere 目录里 10 个文件只有 1 个是纯文本（用 file 命令识别）；Level 5→6：在茫茫文件里按大小/权限/所有者筛选出目标文件。攻略带完整命令。",
+        "reason": "08-20 布置的 Bandit 任务继续：这 3 关全在练 file/find 类命令——正好和今天 linux 分类的 find/grep 呼应。自己先试，卡住了再看攻略。",
+        "url": "https://mayadevbe.me/posts/overthewire/bandit/level5/",
+        "tags": [
+          "CTF",
+          "Bandit",
+          "靶场"
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "title": "ffuf 目录爆破入门：用字典\"问\"出网站的隐藏目录",
+        "summary": "ffuf 是目前最快的 Web 模糊测试工具：给一个 URL 加字典，它并发地试成千上万个路径，找出网站没公开的目录/文件（比如 /admin、/backup.zip）。文章对比了 dirb/ffuf/dirbuster 并带实战参数。",
+        "reason": "工具链下一站（进度表：ffuf 目录爆破，别再推 Burp 了）。目录爆破是 Web 打点的第一步——找到隐藏入口，配合你学的 Web 漏洞知识使用。装好后先在自己搭的靶场试。",
+        "url": "https://developer.aliyun.com/article/1089963",
+        "tags": [
+          "工具",
+          "ffuf",
+          "目录爆破"
+        ]
+      }
+    ],
+    "thinking": [
+      {
+        "title": "请求头也是用户输入：从 SPIP 看\"不信任输入\"的边界",
+        "summary": "很多人以为 HTTP 请求头是浏览器自动生成的、服务器\"自己的东西\"——错。请求头、Cookie、URL 参数、请求体，全部是攻击者可以完全控制的输入。SPIP 这次就是服务器信了请求头里的函数名，把\"输入\"当成了\"代码\"。",
+        "reason": "08-13 推过\"不信任输入\"，今天用真实案例把这条原则推进到 HTTP 层。以后你写渗透脚本（requests 库）时，改 header 是基本功；看漏洞报告时，先问\"哪些输入是攻击者可控的\"——这就是\"为什么存在\"的思考方式。",
+        "tags": [
+          "思考",
+          "不信任输入"
+        ]
+      }
+    ]
   }
 }

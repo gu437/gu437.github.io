@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>CTF 入门文档 · 每日学习</title>
+<style>
+:root{
+  --bg:#0f172a; --panel:#111c33; --line:#1e293b;
+  --fg:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --accent2:#22d3ee;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.8;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:900px; margin:0 auto; padding:0 20px 80px}
+header.top{
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(10px);
+  background:rgba(15,23,42,.88); border-bottom:1px solid var(--line);
+}
+header.top .inner{
+  max-width:900px; margin:0 auto; padding:14px 20px;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+header.top .brand{font-weight:700; font-size:15px; color:#fff; white-space:nowrap}
+header.top .brand span{color:var(--accent)}
+header.top .back{margin-left:auto; font-size:14px; color:var(--muted)}
+header.top .back:hover{color:var(--accent)}
+h1{font-size:30px; line-height:1.35; margin:36px 0 6px; color:#fff; letter-spacing:-.3px}
+.subtitle{color:var(--muted); font-size:14px; margin:0 0 8px}
+h2{font-size:22px; margin:44px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line); color:#fff}
+h3{font-size:18px; margin:30px 0 10px; color:#fff}
+h4{font-size:16px; margin:22px 0 8px; color:#e2e8f0}
+p{margin:12px 0}
+ul,ol{padding-left:24px; margin:12px 0}
+li{margin:5px 0}
+hr{border:0; border-top:1px solid var(--line); margin:36px 0}
+blockquote{
+  margin:18px 0; padding:12px 18px; border-left:3px solid var(--accent);
+  background:var(--panel); border-radius:0 8px 8px 0; color:#cbd5e1;
+}
+blockquote p{margin:6px 0}
+code{
+  font-family:"JetBrains Mono",Consolas,Monaco,"Courier New",monospace;
+  background:#1e293b; padding:2px 6px; border-radius:5px; font-size:.88em; color:#7dd3fc;
+}
+pre{
+  background:#0b1220; border:1px solid var(--line); border-radius:10px;
+  padding:16px 18px; overflow-x:auto; line-height:1.65;
+}
+pre code{background:none; padding:0; color:#cbd5e1; font-size:13.5px}
+table{
+  width:100%; border-collapse:collapse; margin:20px 0; font-size:14.5px;
+  display:block; overflow-x:auto; white-space:normal;
+}
+th,td{border:1px solid var(--line); padding:9px 13px; text-align:left; vertical-align:top}
+th{background:#152238; color:#fff; font-weight:600; white-space:nowrap}
+tr:nth-child(even) td{background:rgba(255,255,255,.017)}
+img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:10px; margin:14px 0; display:block}
+.toc{
+  background:var(--panel); border:1px solid var(--line); border-radius:12px;
+  padding:8px 22px 16px; margin:26px 0 34px;
+}
+.toc>ul{padding-left:18px}
+.toc ul{list-style:none; padding-left:16px; margin:6px 0}
+.toc>ul>li>a{font-weight:600}
+.toc a{color:#cbd5e1; font-size:14px}
+.toc a:hover{color:var(--accent)}
+.card{
+  display:block; background:var(--panel); border:1px solid var(--line);
+  border-radius:14px; padding:20px 22px; margin:16px 0; transition:.18s;
+}
+.card:hover{border-color:var(--accent); transform:translateY(-2px); text-decoration:none}
+.card h3{margin:0 0 6px; color:#fff; font-size:18px}
+.card p{margin:0; color:var(--muted); font-size:14px}
+.tag{display:inline-block; font-size:12px; color:var(--accent2); border:1px solid #164e63;
+     border-radius:999px; padding:1px 10px; margin-left:8px; vertical-align:middle}
+footer{margin-top:60px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:13.5px}
+@media (max-width:640px){
+  body{font-size:15px}
+  h1{font-size:24px}
+  h2{font-size:19px}
+  .wrap{padding:0 16px 60px}
+  header.top .inner{padding:12px 16px}
+  pre{padding:13px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="inner">
+    <div class="brand">📚 每日学习 · <span>CTF 入门文档</span></div>
+    <a class="back" href="../index.html">← 回主站</a>
+  </div>
+</header>
+<div class="wrap">
+<h1>CTF 零基础入门资料</h1>
+<p class="subtitle">面向完全零基础的中文 CTF 入门材料 · 2026-10-15 整理</p>
+<p>两份文档：一份讲<b>读什么文档、按什么顺序读</b>；一份讲<b>用哪个平台、怎么避坑</b>。都是实测过的，不是网上抄的旧攻略。</p>
+<a class="card" href="ctf-reading-guide.html">
+  <h3>CTF 零基础入门 · 文档阅读指南 <span class="tag">建议先读</span></h3>
+  <p>主读 Hello CTF（专为 0 基础写、持续更新），字典查 CTF Wiki；含 Hello CTF 全书目录树与 1 周阅读顺序。</p>
+</a>
+<a class="card" href="platform-research.html">
+  <h3>CTF 入门平台调研结论</h3>
+  <p>首选 CTFHub 技能树；附技能树结构、零基础起步动作，以及「攻防世界新手区已下线」等实测避坑。</p>
+</a>
+<a class="card" href="platform-comparison.html">
+  <h3>平台对比明细</h3>
+  <p>各平台官方原文摘录、收费说明、实测记录与网址（CTFHub / CTFshow / 青少年CTF / NSSCTF / 攻防世界）。</p>
+</a>
+<footer>
+  <p>原始 Markdown 与截图证据一并放在同目录 <code>src/</code> 与 <code>assets/</code> 下。</p>
+</footer>
+</div>
+</body>
+</html>

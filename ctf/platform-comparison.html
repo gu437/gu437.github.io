@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>平台对比明细</title>
+<style>
+:root{
+  --bg:#0f172a; --panel:#111c33; --line:#1e293b;
+  --fg:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --accent2:#22d3ee;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.8;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:900px; margin:0 auto; padding:0 20px 80px}
+header.top{
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(10px);
+  background:rgba(15,23,42,.88); border-bottom:1px solid var(--line);
+}
+header.top .inner{
+  max-width:900px; margin:0 auto; padding:14px 20px;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+header.top .brand{font-weight:700; font-size:15px; color:#fff; white-space:nowrap}
+header.top .brand span{color:var(--accent)}
+header.top .back{margin-left:auto; font-size:14px; color:var(--muted)}
+header.top .back:hover{color:var(--accent)}
+h1{font-size:30px; line-height:1.35; margin:36px 0 6px; color:#fff; letter-spacing:-.3px}
+.subtitle{color:var(--muted); font-size:14px; margin:0 0 8px}
+h2{font-size:22px; margin:44px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line); color:#fff}
+h3{font-size:18px; margin:30px 0 10px; color:#fff}
+h4{font-size:16px; margin:22px 0 8px; color:#e2e8f0}
+p{margin:12px 0}
+ul,ol{padding-left:24px; margin:12px 0}
+li{margin:5px 0}
+hr{border:0; border-top:1px solid var(--line); margin:36px 0}
+blockquote{
+  margin:18px 0; padding:12px 18px; border-left:3px solid var(--accent);
+  background:var(--panel); border-radius:0 8px 8px 0; color:#cbd5e1;
+}
+blockquote p{margin:6px 0}
+code{
+  font-family:"JetBrains Mono",Consolas,Monaco,"Courier New",monospace;
+  background:#1e293b; padding:2px 6px; border-radius:5px; font-size:.88em; color:#7dd3fc;
+}
+pre{
+  background:#0b1220; border:1px solid var(--line); border-radius:10px;
+  padding:16px 18px; overflow-x:auto; line-height:1.65;
+}
+pre code{background:none; padding:0; color:#cbd5e1; font-size:13.5px}
+table{
+  width:100%; border-collapse:collapse; margin:20px 0; font-size:14.5px;
+  display:block; overflow-x:auto; white-space:normal;
+}
+th,td{border:1px solid var(--line); padding:9px 13px; text-align:left; vertical-align:top}
+th{background:#152238; color:#fff; font-weight:600; white-space:nowrap}
+tr:nth-child(even) td{background:rgba(255,255,255,.017)}
+img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:10px; margin:14px 0; display:block}
+.toc{
+  background:var(--panel); border:1px solid var(--line); border-radius:12px;
+  padding:8px 22px 16px; margin:26px 0 34px;
+}
+.toc>ul{padding-left:18px}
+.toc ul{list-style:none; padding-left:16px; margin:6px 0}
+.toc>ul>li>a{font-weight:600}
+.toc a{color:#cbd5e1; font-size:14px}
+.toc a:hover{color:var(--accent)}
+.card{
+  display:block; background:var(--panel); border:1px solid var(--line);
+  border-radius:14px; padding:20px 22px; margin:16px 0; transition:.18s;
+}
+.card:hover{border-color:var(--accent); transform:translateY(-2px); text-decoration:none}
+.card h3{margin:0 0 6px; color:#fff; font-size:18px}
+.card p{margin:0; color:var(--muted); font-size:14px}
+.tag{display:inline-block; font-size:12px; color:var(--accent2); border:1px solid #164e63;
+     border-radius:999px; padding:1px 10px; margin-left:8px; vertical-align:middle}
+footer{margin-top:60px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:13.5px}
+@media (max-width:640px){
+  body{font-size:15px}
+  h1{font-size:24px}
+  h2{font-size:19px}
+  .wrap{padding:0 16px 60px}
+  header.top .inner{padding:12px 16px}
+  pre{padding:13px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="inner">
+    <div class="brand">📚 每日学习 · <span>CTF 入门文档</span></div>
+    <a class="back" href="index.html">← 文档目录</a>
+  </div>
+</header>
+<div class="wrap">
+<h1>平台对比明细</h1>
+<p class="subtitle">各平台原文摘录、实测记录与网址</p>
+<nav class="toc"><strong>目录</strong><div class="toc">
+<ul>
+<li><a href="#_1">平台对比明细（原文摘录 + 实测记录）</a><ul>
+<li><a href="#1-ctfhub">1. CTFHub ★首选</a></li>
+<li><a href="#2-hello-ctf">2. Hello CTF ★教材（不是刷题平台）</a></li>
+<li><a href="#3-ctfshow">3. CTFshow（收费，需谨慎）</a></li>
+<li><a href="#4-ctf">4. 青少年 CTF（全公益）</a></li>
+<li><a href="#5-nssctf">5. NSSCTF</a></li>
+<li><a href="#6">6. 攻防世界（★避坑：新手练习区已下线）</a></li>
+<li><a href="#7">7. 其它被提到但不推荐首选</a></li>
+<li><a href="#_2">复现方式</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<h1 id="_1">平台对比明细（原文摘录 + 实测记录）</h1>
+<p>调研日期：2026-10-15　工具：web_search / read_page / ego 浏览器（真实 Chrome，实测可点）</p>
+<hr />
+<h2 id="1-ctfhub">1. CTFHub ★首选</h2>
+<ul>
+<li>首页 meta 描述：<strong>「CTFHub 专注网络安全、信息安全、白帽子技术的在线学习，实训平台。提供优质的赛事及学习服务，拥有完善的题目环境及配套 writeup，降低 CTF 学习入门门槛」</strong></li>
+<li>站点自述：「开箱即用的 CTF 学习解决方案」</li>
+<li>导航栏目：首页 / 赛事中心 / <strong>技能树</strong> / 历年真题 / 工具 / 排行榜 / WriteUp</li>
+<li>官方 WriteUp 站：https://writeup.ctfhub.com/ ，其分类页给出「Skill」大类下 Web 方向的节点：</li>
+</ul>
+<pre><code>Skill (48)
+├─ Web (38)
+│   ├─ RCE 9
+│   ├─ SQL注入 4
+│   ├─ Web前置技能 5 → HTTP协议 5
+│   ├─ XSS 1
+│   ├─ 信息泄露 10 → Git泄露 2 / 备份文件下载 4
+│   ├─ 密码口令 2
+│   └─ 文件上传 7
+├─ Web进阶 3 → JSON Web Token …
+└─ Pwn 1 → 栈溢出 1
+</code></pre>
+<ul>
+<li>实测：<code>https://www.ctfhub.com/#/skilltree</code> <strong>未登录会自动跳转到 <code>#/user/login</code></strong>（截图：<code>证据_CTFHub技能树跳转登录.png</code>）。登录页提供：账号密码 / 验证码登录、注册账户、微信扫码、GitHub OAuth。页面上<strong>没有</strong>「游客登录」按钮，必须注册。</li>
+<li>费用：免费注册；平台有金币/积分机制（早期题解提到「做题需要积分，通过基础知识、签到、彩蛋部分可以快速获取积分」）。<strong>未实际注册账号验证付费墙。</strong></li>
+<li>第三方评价（Hello CTF 官方教程原文）：CTFhub <strong>「技能树确实不错，但是更新慢」</strong>。</li>
+</ul>
+<h2 id="2-hello-ctf">2. Hello CTF ★教材（不是刷题平台）</h2>
+<ul>
+<li>https://hello-ctf.com/hc-start/</li>
+<li>首页自述：<strong>「开源、免费、新手友好的 CTF 夺旗赛入门教程。从环境搭建到打进第一场比赛，每一步都有题可练。」</strong>「针对 0 基础新手编写」</li>
+<li>内容：什么是 CTF / Flag / WriteUp、赛制（Jeopardy、AWD、AWDP）、五大方向（MISC/Crypto/Web/Reverse/Pwn）各自的前置知识、工具表、入门路线、<strong>题单</strong></li>
+<li>它给的新手题单原文摘要：</li>
+<li>MISC：CTFshow 菜狗杯 MISC 部分、CTFshow MISC 入门、BUUCTF MISC</li>
+<li>Web：CTFshow 菜狗杯 Web、CTFshow Web 入门、NSSCTF Web（前期结合 WP 和 tag 刷）</li>
+<li>RE：NSSCTF 的 HNCTF2022</li>
+<li>PWN：pwn.college、pwnable.tw、NSSCTF HNCTF2022</li>
+<li>活跃度实测：站点 Git Log 显示 GitHub commits 到 <strong>2026-10-14</strong>（chore(events): update CTFtime data），赛事日历更新到 2026-10。</li>
+<li>站内「PRACTICE · 靶场」列表：循镜靶场、NSSCTF、<strong>CTFshow（标注「新手友好的刷题平台」）</strong>、CTF2（原 BUU，标注「经典题库，Writeup 丰富」）、CTFHub（标注「技能树式闯关学习」）。</li>
+</ul>
+<h2 id="3-ctfshow">3. CTFshow（收费，需谨慎）</h2>
+<ul>
+<li>首页：「CTFshow —— 萌新入门的好地方」「拥有 1500+ 的原创题目」</li>
+<li>官方 VIP 页（https://vip.ctf.show/）原文：</li>
+<li>「VIP 会员目前针对平台 <strong>WEB 入门</strong> 系列题目，开通 VIP 会员后，可以解锁<strong>全部 1000 道</strong>题目，必要时，可以提供 WP 和远程技术协助」</li>
+<li>价格：「全程 599.9 元，平均单价 0.6 元」；「可单独购买题目包，每个题目包 100 题，99 元」；「解锁 1-100 ……… 99 元」</li>
+<li>题栈（有价值的新手路线参考，即便不买也能照这个顺序学）：
+    <code>1-20 信息收集｜21-28 爆破｜29-77 命令执行｜78-88 文件包含｜89-150 php特性｜151-170 文件上传｜171-253 sql注入｜254-278 php序列化｜279-300 java｜301-310 代码审计｜311-315 phpCVE｜316-333 xss｜334-344 nodejs｜345-350 jwt｜351-360 ssrf｜361-372 ssti｜372-400 xxe｜400-500 其他｜501-600 大综合｜601-700 框架反序列化/内网渗透</code></li>
+<li>另有第三方博客（2025）标题为「ctfshow~VIP 限免题目 20 道(保姆级解析)」，佐证免费部分很有限。</li>
+<li>实测：<code>https://ctf.show/challenges</code> 未登录跳转 <code>/login</code>。</li>
+</ul>
+<h2 id="4-ctf">4. 青少年 CTF（全公益）</h2>
+<ul>
+<li>https://www.qsnctf.com/ 自述：「青少年CTF 是一个专门为青少年网络安全爱好者打造，提供在线 CTF 比赛、题库练习和网络安全技能训练的全公益平台」</li>
+<li>首页数据：比赛场次 80+、注册用户 22000+、使用院校 40+</li>
+<li>题量：题目总数 —— Web安全 50+、密码学 30+、逆向工程 40+</li>
+<li>注册说明原文：「注册即可获得<strong>新手礼包和基础题目的访问权限</strong>」</li>
+<li>有三步引导：注册账号 → 组建战队 → 参与比赛</li>
+</ul>
+<h2 id="5-nssctf">5. NSSCTF</h2>
+<ul>
+<li>https://www.nssctf.cn/</li>
+<li>首页可见「工坊」（系统化专题学习）：</li>
+<li>Crypto系列——RSA（二）：12 道 RSA 题，讲各类攻击原理</li>
+<li>RE系列——Cheat Engine：5 题，「适合新手小白学习，包教包会」</li>
+<li>RE系列—逆向综合基础：从程序编译过程、汇编原理到 IDA 使用</li>
+<li>PWN系列——二进制综合基础：函数调用与基础 PWN 漏洞原理</li>
+<li>题库大量收录国内高校新生赛真题（SWPUCTF 2021/2025 新生赛、NCTF 2018、HNCTF 2022 等），新生赛是对新手最友好的题型。</li>
+<li>有 AI 专区 / Agent Arena、每日一题、交流板块、比赛中心。</li>
+<li>注意：站内社区帖可见「下载不了附件」「讨金币做工坊」等反馈，说明<strong>部分工坊需金币</strong>，且附件下载偶有问题。</li>
+</ul>
+<h2 id="6">6. 攻防世界（★避坑：新手练习区已下线）</h2>
+<p>实测记录：</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>https://adworld.xctf.org.cn/task?type=web&amp;grade=0</code></td>
+<td><strong>404</strong>「抱歉，你访问的页面不存在」（截图：<code>证据_攻防世界新手练习区404.png</code>）</td>
+</tr>
+<tr>
+<td><code>https://adworld.xctf.org.cn/challenges/list?rwNmOdr=…</code></td>
+<td><strong>404</strong>（同一 404 模板）</td>
+</tr>
+<tr>
+<td>站内导航「实训基地」</td>
+<td>→ <code>https://adworld.xctf.org.cn/all-course</code>，内容是 <strong>AI实训 / 网安实训</strong> 课程页（截图：<code>证据_攻防世界改版为实训课程.png</code>）</td>
+</tr>
+<tr>
+<td>「历年真题」</td>
+<td>收录 9th-RCTF-2025、9th-ACTF-2025、9th-SUCTF-2025 等（标「Limited Free」），也有收费的：2024 河南天安杯 ¥65、2024 熊猫杯-半决赛 ¥338、2024 熊猫杯-决赛 ¥260、2024 强网拟态决赛 ¥510</td>
+</tr>
+<tr>
+<td>首页板块</td>
+<td>赛事日历、赛事大厅、XCTF 专栏、社区、XCTF 人才认证、百城千赛</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>改版后的「网安实训」知识体系（截图可见）：信息科学技术基础领域（Python程序设计、C语言程序设计、Mysql基础入门、Linux基础入门、网络配置与管理）、密码学知识领域（密码学概念、公钥密码、分组密码、流密码、哈希函数）、网络安全知识领域（网络安全概念、网络攻防技术与实践、二进制漏洞挖掘与利用、网络安全防护）……</li>
+<li>四大系列：网络安全意识提升系列 / 教指委网络空间安全系列 / 网络安全岗位实战系列 / <strong>网络安全竞赛提升系列（专注 CTF 等赛事训练）</strong></li>
+<li><strong>结论：现在的攻防世界是「课程 + 认证 + 赛事 + 真题商城」，不是零基础免费刷题场。网上的老攻略（"先去攻防世界刷新手区"）已过期。</strong></li>
+</ul>
+<h2 id="7">7. 其它被提到但不推荐首选</h2>
+<ul>
+<li>CTF2（原 BUUCTF）https://ctf2.dasctf.com/ ：题库大、WP 多，但难度跳跃、无梯度</li>
+<li>CTF Wiki https://ctf-wiki.org/ ：知识库/字典，不是刷题平台</li>
+<li>循镜靶场 https://platform.cyclens.tech/ ：较新的综合练习平台，资料少</li>
+<li>Bugku https://ctf.bugku.com/ ：AWD 做得比较好（Hello CTF 语）</li>
+<li>pwn.college ：想直接学 PWN 才用</li>
+<li>i春秋：以课程/训练营为主（星盟团队 CTF 入门到提高等），偏付费课程</li>
+</ul>
+<hr />
+<h2 id="_2">复现方式</h2>
+<p>本轮结论全部来自上述公开页面，无本地脚本。
+若需复核：</p>
+<pre><code class="language-powershell"># 攻防世界新手区是否仍在（预期 404）
+# 浏览器打开： https://adworld.xctf.org.cn/task?type=web&amp;grade=0
+
+# CTFHub 技能树是否仍需登录（预期跳 #/user/login）
+# 浏览器打开： https://www.ctfhub.com/#/skilltree
+
+# CTFHub 技能树结构（免登录可读）
+# 浏览器打开： https://writeup.ctfhub.com/categories/
+</code></pre>
+<footer>
+  <p>本文档由「每日学习」站点收录 · <a href="index.html">返回目录</a> · <a href="src/platform-comparison.md">查看 Markdown 原文</a></p>
+</footer>
+</div>
+</body>
+</html>

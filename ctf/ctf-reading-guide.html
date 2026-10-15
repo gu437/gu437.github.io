@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>CTF 零基础入门 · 文档阅读指南</title>
+<style>
+:root{
+  --bg:#0f172a; --panel:#111c33; --line:#1e293b;
+  --fg:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --accent2:#22d3ee;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.8;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:900px; margin:0 auto; padding:0 20px 80px}
+header.top{
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(10px);
+  background:rgba(15,23,42,.88); border-bottom:1px solid var(--line);
+}
+header.top .inner{
+  max-width:900px; margin:0 auto; padding:14px 20px;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+header.top .brand{font-weight:700; font-size:15px; color:#fff; white-space:nowrap}
+header.top .brand span{color:var(--accent)}
+header.top .back{margin-left:auto; font-size:14px; color:var(--muted)}
+header.top .back:hover{color:var(--accent)}
+h1{font-size:30px; line-height:1.35; margin:36px 0 6px; color:#fff; letter-spacing:-.3px}
+.subtitle{color:var(--muted); font-size:14px; margin:0 0 8px}
+h2{font-size:22px; margin:44px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line); color:#fff}
+h3{font-size:18px; margin:30px 0 10px; color:#fff}
+h4{font-size:16px; margin:22px 0 8px; color:#e2e8f0}
+p{margin:12px 0}
+ul,ol{padding-left:24px; margin:12px 0}
+li{margin:5px 0}
+hr{border:0; border-top:1px solid var(--line); margin:36px 0}
+blockquote{
+  margin:18px 0; padding:12px 18px; border-left:3px solid var(--accent);
+  background:var(--panel); border-radius:0 8px 8px 0; color:#cbd5e1;
+}
+blockquote p{margin:6px 0}
+code{
+  font-family:"JetBrains Mono",Consolas,Monaco,"Courier New",monospace;
+  background:#1e293b; padding:2px 6px; border-radius:5px; font-size:.88em; color:#7dd3fc;
+}
+pre{
+  background:#0b1220; border:1px solid var(--line); border-radius:10px;
+  padding:16px 18px; overflow-x:auto; line-height:1.65;
+}
+pre code{background:none; padding:0; color:#cbd5e1; font-size:13.5px}
+table{
+  width:100%; border-collapse:collapse; margin:20px 0; font-size:14.5px;
+  display:block; overflow-x:auto; white-space:normal;
+}
+th,td{border:1px solid var(--line); padding:9px 13px; text-align:left; vertical-align:top}
+th{background:#152238; color:#fff; font-weight:600; white-space:nowrap}
+tr:nth-child(even) td{background:rgba(255,255,255,.017)}
+img{max-width:100%; height:auto; border:1px solid var(--line); border-radius:10px; margin:14px 0; display:block}
+.toc{
+  background:var(--panel); border:1px solid var(--line); border-radius:12px;
+  padding:8px 22px 16px; margin:26px 0 34px;
+}
+.toc>ul{padding-left:18px}
+.toc ul{list-style:none; padding-left:16px; margin:6px 0}
+.toc>ul>li>a{font-weight:600}
+.toc a{color:#cbd5e1; font-size:14px}
+.toc a:hover{color:var(--accent)}
+.card{
+  display:block; background:var(--panel); border:1px solid var(--line);
+  border-radius:14px; padding:20px 22px; margin:16px 0; transition:.18s;
+}
+.card:hover{border-color:var(--accent); transform:translateY(-2px); text-decoration:none}
+.card h3{margin:0 0 6px; color:#fff; font-size:18px}
+.card p{margin:0; color:var(--muted); font-size:14px}
+.tag{display:inline-block; font-size:12px; color:var(--accent2); border:1px solid #164e63;
+     border-radius:999px; padding:1px 10px; margin-left:8px; vertical-align:middle}
+footer{margin-top:60px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:13.5px}
+@media (max-width:640px){
+  body{font-size:15px}
+  h1{font-size:24px}
+  h2{font-size:19px}
+  .wrap{padding:0 16px 60px}
+  header.top .inner{padding:12px 16px}
+  pre{padding:13px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="inner">
+    <div class="brand">📚 每日学习 · <span>CTF 入门文档</span></div>
+    <a class="back" href="index.html">← 文档目录</a>
+  </div>
+</header>
+<div class="wrap">
+<h1>CTF 零基础入门 · 文档阅读指南</h1>
+<p class="subtitle">读什么、按什么顺序读、读多久</p>
+<nav class="toc"><strong>目录</strong><div class="toc">
+<ul>
+<li><a href="#ctf">CTF 零基础入门 ·「文档型」资源阅读指南</a><ul>
+<li><a href="#0">0. 一句话结论</a></li>
+<li><a href="#1-hello-ctf">1. 主读：Hello CTF</a><ul>
+<li><a href="#mkdocsyml">全书目录（取自仓库 mkdocs.yml，即站点的左侧导航）</a></li>
+<li><a href="#1-12">零基础推荐阅读顺序（约 1 周，每天 1~2 小时）</a></li>
+<li><a href="#_1">站点另外附赠的东西</a></li>
+</ul>
+</li>
+<li><a href="#2-ctf-wiki">2. 当字典用：CTF Wiki</a></li>
+<li><a href="#3">3. 补充读物</a></li>
+<li><a href="#4">4. 只读文档的两个坑（提前说）</a></li>
+<li><a href="#5">5. 最小可执行清单（照抄即可）</a></li>
+<li><a href="#_2">证据</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<h1 id="ctf">CTF 零基础入门 ·「文档型」资源阅读指南</h1>
+<blockquote>
+<p>本文回答的是：<strong>不想先泡在刷题平台里，想先靠「读文档」把 CTF 搞明白，该读什么、按什么顺序读、读多久。</strong>
+调研日期：2026-10-15　　配套文件：<code>index.html</code>（平台型资源）、<code>platform-comparison.html</code></p>
+</blockquote>
+<hr />
+<h2 id="0">0. 一句话结论</h2>
+<p><strong>主读 <a href="https://hello-ctf.com/hc-start/">Hello CTF</a>（免费开源、专为 0 基础写、2026-10-15 还在更新），
+当字典查 <a href="https://ctf-wiki.org/">CTF Wiki</a>，
+<a href="https://firmianay.gitbook.io/ctf-all-in-one/">CTF-All-In-One</a> 已停更两年、只当 PWN 方向补充。</strong></p>
+<p>读的顺序不是从第一页读到最后一页，而是：<strong>快速开始 → 挑一个方向（Web 或 MISC）→ 只读那个方向的「环境与工具 + 入门题单」→ 立刻去做题 → 做完回来读对应知识点章节。</strong></p>
+<hr />
+<h2 id="1-hello-ctf">1. 主读：Hello CTF</h2>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在线读</td>
+<td>https://hello-ctf.com/hc-start/</td>
+</tr>
+<tr>
+<td>源码/离线</td>
+<td>https://github.com/ProbiusOfficial/Hello-CTF</td>
+</tr>
+<tr>
+<td>作者</td>
+<td>探姬（ProbiusOfficial）</td>
+</tr>
+<tr>
+<td>许可</td>
+<td>GPL-3.0，免费开源</td>
+</tr>
+<tr>
+<td>热度</td>
+<td>⭐ 4257 star / 264 fork（截至 2026-10-15）</td>
+</tr>
+<tr>
+<td>活跃度</td>
+<td><strong>最后提交 2026-10-15（当天）</strong>；10 月还在合并 PR（如修正 SSTI 示例、新增 TGScope 工具、MD5 碰撞论文链接）</td>
+</tr>
+<tr>
+<td>自述</td>
+<td>「开源免费、新手友好的 CTF 入门教程」「针对 0 基础新手编写，同时兼顾信息差的填补」</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mkdocsyml">全书目录（取自仓库 mkdocs.yml，即站点的左侧导航）</h3>
+<pre><code>快速开始  hc-start/
+前言      关于本书 / 食用方法 / 加入我们
+
+MISC | 杂项
+  ├ 信息收集(OSINT)
+  ├ 文件与编码基础：编码扩展 / 文件基础 / 压缩包
+  ├ 隐写分析：图片隐写 / 文件隐写 / 音频隐写
+  ├ 取证分析：流量分析 / 内存取证 / 工控类
+  └ 附：文件签名表
+
+Web | 网络攻防
+  ├ 环境与工具：Web环境设置 / Docker安装配置 / Docker与漏洞环境 / 虚拟机与网络模拟 /
+  │            Burp Suite / Python脚本 / HTTP协议
+  ├ Web入门题单          ← 直接给题单，读完就能开刷
+  ├ 信息收集：敏感信息泄露
+  ├ PHP专题：PHP基础 / PHP特性与常见绕过 / PHP反序列化 / PHP代码审计
+  ├ 注入类漏洞：SQL注入 / NoSQL注入 / XSS / CSRF / SSTI / XXE / SSRF
+  ├ 文件类漏洞：文件上传 / 文件包含 / 目录穿越 / 任意文件读取
+  ├ 命令与代码执行：RCE
+  ├ 会话与认证安全（Session/JWT）
+  ├ 逻辑漏洞
+  ├ 语言扩展：Python反序列化 / Python沙箱逃逸 / Flask安全 / 原型链污染 /
+  │           JS沙箱逃逸 / JS逆向 / Java安全基础 / Java反序列化 / Spring漏洞 / Java代码审计
+  └ 进阶专题：WAF绕过 / 请求走私 / 缓存投毒 / XS-Leaks / 密码学应用题 / 云与容器安全
+     实战能力：渗透链路基础 → 多层网络渗透 → 对抗与综合(AWD/Web与二进制结合/Nday/Writeup复盘)
+
+Crypto | 密码学   环境配置 / 前情提要 / 编码基础 / 古典密码 / 现代密码
+Reverse | 逆向工程  灵魂FAQ / C语言基础 / 存储结构 / 可执行文件 / 从零开始的IDA / IDA动态调试 /
+                   基本运算 / 编码基础 / 字节流算法 / 分组密码 / z3约束求解 / x86汇编初步 /
+                   代码保护与对抗(花指令/加壳/VM/SMC/反调试/控制流平坦化…) / 符号执行 /
+                   语言与框架(Python/.NET/Rust/JS) / Android / 解题技巧
+Pwn | 二进制安全  wsl2环境配置 / 汇编(x86) / 常见保护 / 栈溢出 / ROP入门 / 常见ROP技巧 / ROP进阶
+AWD | 攻防模式   AWD介绍 / AWD平台 / WEB技巧 / PWN技巧
+AI | 人工智能安全  初识AI / 你的第一个神经网络
+blockchain | 区块链安全  Move 语言系列
+附录  提问的智慧 / NSSCTF平台使用 / 推荐书单
+</code></pre>
+<h3 id="1-12">零基础推荐阅读顺序（约 1 周，每天 1~2 小时）</h3>
+<table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>读什么</th>
+<th>为什么 / 读完能干什么</th>
+<th>建议时长</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>快速开始</code>（hc-start）</td>
+<td>CTF 是什么、Flag、赛制、五大方向怎么选、要什么基础。<strong>这一篇是全站最重要的一篇</strong></td>
+<td>1 小时</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>前言 / 食用方法</code></td>
+<td>知道这份文档自己该怎么用（哪些是必读、哪些是查阅型）</td>
+<td>15 分钟</td>
+</tr>
+<tr>
+<td>3</td>
+<td>选方向：<code>Web</code> 或 <code>MISC</code> 的 <code>index</code></td>
+<td>决定先啃哪个。零基础一般选 <strong>Web</strong>（不需系统底层知识）或 <strong>MISC</strong>（趣味强、熟悉节奏）</td>
+<td>30 分钟</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>Web → 环境与工具 → HTTP协议</code>（或 <code>MISC → 文件与编码基础</code>）</td>
+<td>唯一必须先补的基础课。Web 只需看懂网页 + 会用 F12</td>
+<td>1.5 小时</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>Web → Web入门题单</code></td>
+<td><strong>从这里开始离开纯阅读</strong>，按题单去刷题</td>
+<td>30 分钟</td>
+</tr>
+<tr>
+<td>6</td>
+<td>刷题中遇到什么回读什么</td>
+<td>如 <code>敏感信息泄露</code>、<code>文件上传</code>、<code>SQL注入</code> 章节，边做边查</td>
+<td>持续</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>附录 → 提问的智慧</code></td>
+<td>决定你能不能在社区里问出好问题（很实际）</td>
+<td>20 分钟</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>附录 → 推荐书单</code></td>
+<td>需要系统补课/买书时再来看</td>
+<td>备用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>反例（别这么干）</strong>：从 <code>Pwn</code> 或 <code>Reverse</code> 开始逐页读。这两个方向前置知识多（汇编、C、Linux），零基础直接读会读不懂也没题可做，是弃坑率最高的路径。</p>
+<h3 id="_1">站点另外附赠的东西</h3>
+<ul>
+<li><strong>各方向现成题单</strong>（写在 <code>hc-start</code> 里，不用自己找题）：
+  MISC → CTFshow 菜狗杯 MISC、CTFshow MISC 入门、BUUCTF MISC；
+  Web → CTFshow 菜狗杯 Web、CTFshow Web 入门、NSSCTF Web；
+  RE → NSSCTF HNCTF2022；Pwn → pwn.college、pwnable.tw。</li>
+<li><strong>工具表</strong>（每个方向一节）：MISC 的 CyberChef / 010 Editor / Stegsolve / Wireshark；Web 的 HackBar / Burp Suite / Wappalyzer / dirsearch / SQLMap；RE 的 IDA / x64dbg / GDB；Pwn 的 pwntools 等。</li>
+<li><strong>赛事日历</strong>：站点首页有国内外 CTF 赛程（数据每天从 CTFtime 同步），可以挑一个"新生赛"打第一场。</li>
+<li><strong>配套靶场</strong>（另一个 GitHub 作者的项目，同属"文档+靶场"型）：RCE-labs、PHPSerialize-labs、PHPinclude-labs、n3tfl0w-labs（流量分析）、hello-ssrf —— 每个都是一套<strong>带讲解的专项练习</strong>，比裸刷题更适合零基础。</li>
+</ul>
+<hr />
+<h2 id="2-ctf-wiki">2. 当字典用：CTF Wiki</h2>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在线读</td>
+<td>https://ctf-wiki.org/</td>
+</tr>
+<tr>
+<td>源码</td>
+<td>https://github.com/ctf-wiki/ctf-wiki （⭐ 9704 / 1439 fork）</td>
+</tr>
+<tr>
+<td>活跃度</td>
+<td>最后提交 2026-08-23；2026 年 7 月还在重构 AI 章节、修 Pwn/密码学内容</td>
+</tr>
+<tr>
+<td>性质</td>
+<td><strong>社区维护的知识库，不提供学习路线</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>官方自述定位：<em>「网上资料大都零散琐碎，初学者往往并不知道该如何系统性地学习 CTF 相关领域知识……CTF Wiki 对各个方向的知识和技术进行介绍，以便于初学者更好地学习」</em>；并声明<strong>永远不会商业化、永远不会出版书籍</strong>。</li>
+<li>覆盖方向：Misc / Crypto / Web / Reverse / Pwn / 区块链 / 移动安全 / AI 等。</li>
+<li><strong>正确用法</strong>：<em>不要</em>从它的目录开始读。它的正确角色是「写题卡住时查某个知识点」——比如报了 <code>SQL注入</code> 的题，去查它的 SQL 注入词条把原理补齐，而不是通读。</li>
+<li><strong>和 Hello CTF 的分工</strong>：Hello CTF 负责"带你走"，CTF Wiki 负责"查得到"。</li>
+</ul>
+<hr />
+<h2 id="3">3. 补充读物</h2>
+<table>
+<thead>
+<tr>
+<th>资源</th>
+<th>地址</th>
+<th>状态</th>
+<th>怎么用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CTF-All-In-One《CTF 竞赛入门指南》</td>
+<td>https://firmianay.gitbook.io/ctf-all-in-one/ ／ <a href="https://github.com/firmianay/CTF-All-In-One">GitHub</a></td>
+<td>⭐ 4510，<strong>最后提交 2024-07-27（停更两年）</strong></td>
+<td>内容以 Linux 二进制/PWN 为主、讲解细；当作 PWN 方向的深入读物，别当入门主线</td>
+</tr>
+<tr>
+<td>HackerMind 安全思维导图</td>
+<td>https://github.com/Ascotbe/HackerMind</td>
+<td>⭐ 高，最后更新 2023-12</td>
+<td>一堆安全方向思维导图（含 CTF 资料、MISC、Web 漏洞脑图）；想先看"全貌地图"可以翻，但内容偏渗透测试</td>
+</tr>
+<tr>
+<td>Hello CTF 推荐书单（纸质书）</td>
+<td>https://hello-ctf.com/hc-appendix/book/</td>
+<td>2026 仍在维护</td>
+<td>综合类：《从0到1：CTFer成长之路》Nu1L、《CTF特训营》FlappyPig、《CTF实战：从入门到提升》恒星实验室、《CTF那些事儿》北航 Lancet、《CTF实战 技术 解题与进阶》ChaMd5；Web：《白帽子讲Web安全(第2版)》《Web漏洞解析与攻防实战》；Crypto：《深入浅出密码学》《高三数学选修4-6 初等数论初步》；Pwn：《CTF竞赛权威指南（Pwn篇）》杨超</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">4. 只读文档的两个坑（提前说）</h2>
+<ol>
+<li><strong>只读不练 = 没学会。</strong> CTF 是手上功夫，文档的作用是"让你知道该练什么"。Hello CTF 自己在 <code>hc-start</code> 里就写了：入门要求只有两条——<strong>信息检索能力</strong>和<strong>学习能力</strong>，说人话就是"会搜、会看懂别人的 WriteUp、会跟着复现"。所以读完第 5 步就去刷题，不要想着"读完整本书再开始"。</li>
+<li><strong>不要按目录顺序通读。</strong> 这两份文档都是<strong>网状参考书</strong>，不是线性教材。正确姿势：读「快速开始 + 一个方向的环境/HTTP 基础 + 入门题单」这三块（不到 4 小时），然后<strong>以题驱动阅读</strong>。</li>
+</ol>
+<hr />
+<h2 id="5">5. 最小可执行清单（照抄即可）</h2>
+<pre><code>今天：     读 hello-ctf.com/hc-start/ 全篇（1h）
+           → 决定先学 Web 还是 MISC（建议 Web）
+明天：     读 Web 方向「环境与工具 → HTTP协议」+ 装好浏览器 F12 / HackBar（1.5h）
+第三天：   打开「Web入门题单」，去 CTFHub 技能树 或 青少年CTF 开始做第一题
+此后：     做一题 → 卡住 → 回 Hello CTF 读对应章节 / 查 CTF Wiki → 再做一遍
+每周一次： 回看 Hello CTF 首页「赛事日历」，挑一场新生赛报名（以赛代练）
+</code></pre>
+<hr />
+<h2 id="_2">证据</h2>
+<table>
+<thead>
+<tr>
+<th>证据</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hello CTF 全书目录（本文第 1 节目录树）</td>
+<td>仓库 <code>mkdocs.yml</code> 的 <code>nav:</code> 段，<code>gh api repos/ProbiusOfficial/Hello-CTF/contents/mkdocs.yml</code></td>
+</tr>
+<tr>
+<td>Hello CTF 推荐书单（原文摘录）</td>
+<td>仓库 <code>docs/hc-appendix/book.md</code></td>
+</tr>
+<tr>
+<td>Hello CTF 活跃度（⭐4257，最后提交 2026-10-15）</td>
+<td><code>repo_summary.py ProbiusOfficial/Hello-CTF</code></td>
+</tr>
+<tr>
+<td>CTF Wiki 活跃度（⭐9704，最后提交 2026-08-23）</td>
+<td><code>repo_summary.py ctf-wiki/ctf-wiki</code></td>
+</tr>
+<tr>
+<td>CTF-All-In-One 停更（⭐4510，最后提交 2024-07-27）</td>
+<td><code>repo_summary.py firmianay/CTF-All-In-One</code></td>
+</tr>
+<tr>
+<td>CTF Wiki 自我定位原文</td>
+<td>https://ctf-wiki.org/ 简介页</td>
+</tr>
+<tr>
+<td>新手必读的两条能力要求</td>
+<td>https://hello-ctf.com/hc-start/ 「Q：学习 CTF 有什么要求么？」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>复现方式</strong>（需要 gh 不在 PATH 时用全路径）：</p>
+<pre><code class="language-powershell">$env:PATH=&quot;C:\Users\87209\.dsh\tools\gh\bin;$env:PATH&quot;; $env:PYTHONUTF8=&quot;1&quot;
+$s=&quot;C:\Users\87209\.dsh\profiles\web\node_modules\github-explore\skills\github-explore\scripts&quot;
+python &quot;$s\repo_summary.py&quot; ProbiusOfficial/Hello-CTF --format markdown
+gh api -H &quot;Accept: application/vnd.github.raw&quot; repos/ProbiusOfficial/Hello-CTF/contents/mkdocs.yml
+</code></pre>
+<footer>
+  <p>本文档由「每日学习」站点收录 · <a href="index.html">返回目录</a> · <a href="src/ctf-reading-guide.md">查看 Markdown 原文</a></p>
+</footer>
+</div>
+</body>
+</html>
